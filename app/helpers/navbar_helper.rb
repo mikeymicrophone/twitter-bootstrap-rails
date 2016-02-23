@@ -27,12 +27,6 @@ module NavbarHelper
 
   def drop_down(name, options={})
     content_tag :li, :class => "dropdown" do
-      puts "name"
-      puts name
-      puts "there it was"
-      puts "drop_down_link"
-      puts drop_down_link(name, caret: options.fetch(:caret, true))
-      puts "there it was"
       drop_down_link(name, caret: options.fetch(:caret, true)) + drop_down_list { yield }
     end
   end
