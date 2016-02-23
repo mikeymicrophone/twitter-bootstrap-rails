@@ -181,6 +181,24 @@ describe NavbarHelper, :type => :helper do
       expect(ele).to have_tag(:li, with: {class: 'dropdown'})
       expect(ele).to have_tag(:a, with: {class: 'dropdown-toggle'})
     end
+    
+    fit "can omit the caret by passing a parameter to drop_down_link" do
+      expect(self).to receive(:drop_down_link).with("Products", caret: false)
+      drop_down "Products", caret: false do
+        menu_item "Cranberries", "/"
+      end
+    end
+    
+    fdescribe "drop_down_link" do
+      it "displays the name and a caret" do
+        expect(drop_down_link, "Blueberries").to match "Blueberries"
+        expect(drop_down_link, "Raspberries").to match "caret"
+      end
+      
+      it "can omit caret with explicit false parameter" do
+        expect(drop_down_link "Cranberries", caret: false).to_not match("caret")
+      end
+    end
   end
 
   describe "drop_down_with_submenu" do
